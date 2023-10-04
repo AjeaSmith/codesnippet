@@ -16,6 +16,8 @@
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
