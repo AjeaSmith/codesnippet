@@ -24,15 +24,11 @@
   padding: 0;
   list-style: none;
 }
-.folder_list ul li {
-  /* background: red; */
-}
+
 .folder_list ul div {
   cursor: pointer;
   padding: 1rem 2rem;
   align-items: center;
-  /* background: red; */
-  /* margin-bottom: 28px; */
   display: flex;
 }
 .folder_list ul div:hover {
