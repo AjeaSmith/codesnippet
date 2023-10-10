@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+const { PrismaClient } = require('@prisma/client');
 
 async function seedDatabase() {
   const prisma = new PrismaClient();
@@ -23,6 +23,7 @@ async function seedDatabase() {
       });
       console.log('Default folders created successfully.');
     } else {
+      console.log('Default folders already added');
       return;
     }
   } catch (error) {

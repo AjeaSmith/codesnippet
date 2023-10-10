@@ -9,7 +9,7 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "prepare": "husky install",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2",

@@ -1,19 +1,11 @@
 import styles from '@/components/Sidebar/SideBar.module.css';
+import { getFolders } from '@/lib/folders/actions';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type AppProps = {
-  folders: {
-    id: number;
-    name: string;
-    snippets: {
-      id: number;
-      name: String;
-    }[];
-  }[];
-};
 
-export default function SideBarMenu({ folders }: AppProps) {
+export default async function SideBarMenu() {
+  const folders = await getFolders()
   return (
     <aside className={styles.aside}>
       {/* USER */}
