@@ -1,7 +1,19 @@
 import styles from '@/components/Sidebar/SideBar.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
 
-export default function SideBarMenu() {
+type AppProps = {
+  folders: {
+    id: number;
+    name: string;
+    snippets: {
+      id: number;
+      name: String;
+    }[];
+  }[];
+};
+
+export default function SideBarMenu({ folders }: AppProps) {
   return (
     <aside className={styles.aside}>
       {/* USER */}
@@ -20,18 +32,25 @@ export default function SideBarMenu() {
         <h5>Folders</h5>
         {/* Data fetching for folders */}
         <ul>
-          <div>
-            <Image src="/star.png" width={24} height={24} alt="star" />
-            <li>Favorites</li>
-          </div>
-          <div className={styles.active}>
+          {folders.map((folder) => {
+            return (
+              <Link href={`/folder/${folder.id}`} key={folder.id}>
+                <div>
+                  <Image src="/star.png" width={24} height={24} alt="star" />
+                  <li>{folder.name}</li>
+                </div>
+              </Link>
+            );
+          })}
+
+          {/* <div className={styles.active}>
             <Image src="/folder.png" width={24} height={24} alt="folder" />
             <li>All Snippets</li>
           </div>
           <div>
             <Image src="/folder.png" width={24} height={24} alt="folder" />
             <li>Recommended</li>
-          </div>
+          </div> */}
         </ul>
       </section>
 
