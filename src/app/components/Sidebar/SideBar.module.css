@@ -13,14 +13,19 @@
 }
 
 .folder_list {
-  scroll-behavior: smooth;
+  max-height: 490px; /* Set a maximum height */
+  overflow-y: auto; /* Enable vertical scrollbar when needed */
+  /* Add other styling as needed */
 }
+
 .folder_list h5 {
   opacity: 60%;
   margin-bottom: 30px;
   margin-inline: 40px;
 }
 .folder_list ul {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
   padding: 0;
   list-style: none;
 }

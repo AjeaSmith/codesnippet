@@ -16,9 +16,9 @@ async function seedDatabase() {
       // Create three default folders
       await prisma.folder.createMany({
         data: [
-          { name: 'Favorites' },
-          { name: 'All Snippets' },
-          { name: 'Recommended' },
+          { name: 'Favorites', icon: 'star' },
+          { name: 'All Snippets', icon: 'folder' },
+          { name: 'Recommended', icon: 'folder' },
         ],
       });
       console.log('Default folders created successfully.');
