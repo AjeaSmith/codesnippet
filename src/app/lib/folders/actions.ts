@@ -18,8 +18,6 @@ export async function createFolder(name: string) {
   }
 }
 
-// export const revalidate = 3600;
-
 export const getFolders = cache(async () => {
   try {
     console.log('Its called');

@@ -1,5 +1,5 @@
 import styles from '@/app/page.module.css';
-import SideBarMenu from '@/app/components/Sidebar/SideBar';
+import SideBarMenu from '@/components/Sidebar/SideBar';
 import { inter400 } from './fonts/fonts';
 
 export default async function Layout({ children }: any) {
@@ -9,7 +9,7 @@ export default async function Layout({ children }: any) {
       <SideBarMenu />
 
       {/* Content */}
-      <section className="w-3/4 p-4">{children}</section>
+      <section>{children}</section>
     </main>
   );
 }

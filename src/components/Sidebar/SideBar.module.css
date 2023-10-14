@@ -21,7 +21,7 @@
 .folder_list h5 {
   opacity: 60%;
   margin-bottom: 30px;
-  margin-inline: 40px;
+  margin-inline: 35px;
 }
 .folder_list ul {
   overflow-y: scroll;
@@ -41,8 +41,11 @@
   cursor: pointer;
 }
 
-.folder_list ul div img {
-  margin-right: 11px;
+.folder_list ul div svg {
+  margin-right: 8px;
+}
+.folder_list ul div.active {
+  background-color: #fe6c0b;
 }
 
 /* FOLDER CTA */

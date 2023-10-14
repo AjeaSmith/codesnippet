@@ -1,7 +1,7 @@
 import { getFolders } from '@/app/lib/folders/actions';
 import Image from 'next/image';
-import Link from 'next/link';
 import AddFolderButton from '../AddFolderButton';
+import FolderList from '../FolderList';
 import styles from './SideBar.module.css';
 
 export default async function SideBarMenu() {
@@ -11,6 +11,7 @@ export default async function SideBarMenu() {
       {/* USER */}
       <section className={styles.user_section}>
         <Image
+          priority
           src="/user.png"
           width={100}
           height={100}
@@ -24,26 +25,12 @@ export default async function SideBarMenu() {
         <h5>Folders</h5>
         <ul>
           {folders.map((folder) => {
-            return (
-              <Link href={`/folder/${folder.name}`} key={folder.id}>
-                <div>
-                  <Image
-                    src={`/${folder.icon}.png`}
-                    width={24}
-                    height={24}
-                    alt={folder.icon}
-                  />
-                  <li>{folder.name}</li>
-                </div>
-              </Link>
-            );
+            return <FolderList folder={folder} key={folder.id} />;
           })}
         </ul>
       </section>
 
-      {/* CTA New Folder */}
       <section className={styles.new_folder_btn}>
-        {/* POP up modal */}
         <AddFolderButton />
       </section>
     </aside>
