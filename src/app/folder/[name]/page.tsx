@@ -1,12 +1,8 @@
 import Layout from '@/app/page';
 
-const Folder = ({ params }: { params: { name: string } }) => {
+const FolderPage = ({ params }: { params: { name: string } }) => {
   const decodedParams = decodeURIComponent(params.name).replace(/%20/g, ' ');
-  return (
-    <div>
-      <Layout>{decodedParams}</Layout>
-    </div>
-  );
+  return <Layout>{decodedParams}</Layout>;
 };
 
-export default Folder;
+export default FolderPage;

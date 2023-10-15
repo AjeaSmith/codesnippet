@@ -1,5 +1,5 @@
 'use server';
-import prisma from '@/app/lib/db';
+import prisma from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { cache } from 'react';
 
@@ -12,7 +12,7 @@ export async function createFolder(name: string) {
       },
     });
 
-     revalidatePath('/');
+    revalidatePath('/');
   } finally {
     await prisma.$disconnect();
   }

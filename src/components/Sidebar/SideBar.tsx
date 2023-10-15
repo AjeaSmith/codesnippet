@@ -1,11 +1,9 @@
-import { getFolders } from '@/app/lib/folders/actions';
 import Image from 'next/image';
 import AddFolderButton from '../AddFolderButton';
 import FolderList from '../FolderList';
 import styles from './SideBar.module.css';
 
 export default async function SideBarMenu() {
-  const folders = await getFolders();
   return (
     <aside className={styles.aside}>
       {/* USER */}
@@ -23,13 +21,10 @@ export default async function SideBarMenu() {
       {/* FOLDERS */}
       <section className={styles.folder_list}>
         <h5>Folders</h5>
-        <ul>
-          {folders.map((folder) => {
-            return <FolderList folder={folder} key={folder.id} />;
-          })}
-        </ul>
+        <FolderList />
       </section>
 
+      {/* ADD FOLDER */}
       <section className={styles.new_folder_btn}>
         <AddFolderButton />
       </section>

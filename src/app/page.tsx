@@ -2,15 +2,21 @@ import styles from '@/app/page.module.css';
 import SideBarMenu from '@/components/Sidebar/SideBar';
 import { inter400 } from './fonts/fonts';
 
-export default async function Layout({ children }: any) {
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <main className={`${styles.page_wrapper} ${inter400.className}`}>
+    <div className={`${styles.page_wrapper} ${inter400.className}`}>
       {/* Sidebar */}
       <SideBarMenu />
 
       {/* Content */}
-      <section>{children}</section>
-    </main>
+      <main>
+        <section>{children}</section>
+      </main>
+    </div>
   );
 }
 
