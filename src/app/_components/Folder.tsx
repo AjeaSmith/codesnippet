@@ -2,7 +2,7 @@
 import { Folder } from '@/app/_types/types';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
-import styles from '../components/Sidebar/SideBar.module.css';
+import styles from '@/app/_components/Sidebar/SideBar.module.css';
 
 const Folder = ({ folder }: { folder: Folder }) => {
   const pathname = usePathname();
