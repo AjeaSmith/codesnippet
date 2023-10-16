@@ -1,5 +1,5 @@
 'use server';
-import prisma from '@/lib/db';
+import prisma from '@/app/_lib/db';
 import { revalidatePath } from 'next/cache';
 import { cache } from 'react';
 

@@ -1,6 +1,6 @@
 import styles from '@/app/page.module.css';
-import SideBarMenu from '@/components/Sidebar/SideBar';
-import { inter400 } from './fonts/fonts';
+import SideBarMenu from '@/app/_components/Sidebar/SideBar';
+import { inter400 } from './_fonts/fonts';
 
 export default async function AppLayout({
   children,

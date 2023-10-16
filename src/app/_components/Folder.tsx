@@ -1,5 +1,5 @@
 'use client'
-import { Folder } from '@/lib/types';
+import { Folder } from '@/app/_types/types';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import styles from '../components/Sidebar/SideBar.module.css';
