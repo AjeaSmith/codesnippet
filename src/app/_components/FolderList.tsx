@@ -1,4 +1,4 @@
-import { getFolders } from '../../../utils/folders/actions';
+import { getFolders } from '@/utils/folders/actions';
 import Folder from './Folder';
 
 const FolderList = async () => {

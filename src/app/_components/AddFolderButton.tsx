@@ -1,5 +1,5 @@
 'use client';
-import { createFolder } from '@/lib/folders/actions';
+import { createFolder } from '@/utils/folders/actions';
 import Image from 'next/image';
 
 const AddFolderButton = () => {
