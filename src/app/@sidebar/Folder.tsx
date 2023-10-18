@@ -2,7 +2,7 @@
 import { Folder } from '@/app/_types/types';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
-import styles from '@/app/_components/Sidebar/SideBar.module.css';
+import styles from './page.module.css';
 
 const Folder = ({ folder }: { folder: Folder }) => {
   const pathname = usePathname();
@@ -46,6 +46,9 @@ const Folder = ({ folder }: { folder: Folder }) => {
           </svg>
         )}
         <li>{folder.name}</li>
+        <div className="more-options">
+          <button className="more-options-button">More Options</button>
+        </div>
       </div>
     </Link>
   );

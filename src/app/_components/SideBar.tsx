@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import AddFolderButton from '../AddFolderButton';
-import FolderList from '../FolderList';
+import AddFolderButton from '../@sidebar/AddFolderButton';
+import FolderList from '../@sidebar/FolderList';
 import styles from './SideBar.module.css';
 
-export default async function SideBarMenu() {
+export default function SideBarMenu() {
   return (
     <aside className={styles.aside}>
+
       {/* USER */}
       <section className={styles.user_section}>
         <Image
@@ -19,10 +20,11 @@ export default async function SideBarMenu() {
       </section>
 
       {/* FOLDERS */}
-      <section className={styles.folder_list}>
+      <nav className={styles.folder_list}>
         <h5>Folders</h5>
+
         <FolderList />
-      </section>
+      </nav>
 
       {/* ADD FOLDER */}
       <section className={styles.new_folder_btn}>

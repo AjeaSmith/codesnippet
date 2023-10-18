@@ -1,7 +1,6 @@
 'use server';
 import prisma from '@/app/_lib/db';
 import { revalidatePath } from 'next/cache';
-import { cache } from 'react';
 
 export async function createFolder(name: string) {
   try {
@@ -13,22 +12,28 @@ export async function createFolder(name: string) {
     });
 
     revalidatePath('/');
+  } catch (err) {
+    await prisma.$disconnect();
+  }
+}
+
+export async function getFolders() {
+  try {
+    const folders = await prisma.folder.findMany();
+
+    return folders;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Something went wrong');
   } finally {
     await prisma.$disconnect();
   }
 }
 
-export const getFolders = cache(async () => {
+export const deleteFolder = async (id: string) => {
   try {
-    console.log('Its called');
-    const folders = await prisma.folder.findMany();
-
-    if (!folders.length) {
-      // Handle error - look at docs
-    }
-
-    return folders;
-  } finally {
-    await prisma.$disconnect();
+    await prisma.folder.delete({ where: { id } });
+  } catch (error) {
+    console.log('FOLDER:', error);
   }
-});
+};
