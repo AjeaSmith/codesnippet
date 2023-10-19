@@ -1,0 +1,35 @@
+.folder_list {
+  max-height: 490px; /* Set a maximum height */
+  overflow-y: auto; /* Enable vertical scrollbar when needed */
+  /* Add other styling as needed */
+}
+
+.folder_list h5 {
+  opacity: 60%;
+  margin-bottom: 30px;
+  margin-inline: 35px;
+}
+.folder_list ul {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  padding: 0;
+  list-style: none;
+}
+
+.folder_list ul div {
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  align-items: center;
+  display: flex;
+}
+.folder_list ul div:hover {
+  background: rgba(19, 20, 21);
+  cursor: pointer;
+}
+
+.folder_list ul div svg {
+  margin-right: 8px;
+}
+.folder_list ul div.active {
+  background-color: #fe6c0b;
+}

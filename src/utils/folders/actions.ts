@@ -1,5 +1,6 @@
 'use server';
 import prisma from '@/app/_lib/db';
+import { Folder } from '@/app/_types/Folder';
 import { revalidatePath } from 'next/cache';
 
 export async function createFolder(name: string) {
@@ -17,23 +18,26 @@ export async function createFolder(name: string) {
   }
 }
 
-export async function getFolders() {
+export async function getFolders(): Promise<Folder[]> {
   try {
-    const folders = await prisma.folder.findMany();
-
-    return folders;
+     throw new Error('Fetch Failed');
+    // const folders = await prisma.folder.findMany();
+    // if (!folders.length) {
+    //   throw new Error('Fetch Failed');
+    // }
+    // return folders;
   } catch (error) {
-    console.error(error);
-    throw new Error('Something went wrong');
+    console.error('FETCH FOLDERS:', error);
+    throw error;
   } finally {
     await prisma.$disconnect();
   }
 }
 
-export const deleteFolder = async (id: string) => {
+export async function deleteFolder(id: string) {
   try {
     await prisma.folder.delete({ where: { id } });
   } catch (error) {
     console.log('FOLDER:', error);
   }
-};
+}

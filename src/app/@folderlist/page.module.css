@@ -1,3 +1,7 @@
+.page_wrapper {
+    display: flex;
+}
+
 .aside {
   width: 357px;
   height: 100vh;
@@ -10,6 +14,31 @@
   background: rgba(19, 20, 21, 0.5);
   padding: 1rem;
   border-bottom: 1px solid black;
+}
+
+/* FOLDER CTA */
+.new_folder_btn {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  border-top: 1px solid black;
+}
+.new_folder_btn button {
+  cursor: pointer;
+  height: 80px;
+  border: none;
+  background: rgba(19, 20, 21, 0.7);
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.new_folder_btn button span {
+  color: #f4faff;
+}
+.new_folder_btn button img {
+  margin-right: 5px;
 }
 
 .folder_list {
@@ -46,29 +75,4 @@
 }
 .folder_list ul div.active {
   background-color: #fe6c0b;
-}
-
-/* FOLDER CTA */
-.new_folder_btn {
-  width: 100%;
-  bottom: 0;
-  position: absolute;
-  border-top: 1px solid black;
-}
-.new_folder_btn button {
-  cursor: pointer;
-  height: 80px;
-  border: none;
-  background: rgba(19, 20, 21, 0.7);
-  width: 100%;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.new_folder_btn button span {
-  color: #f4faff;
-}
-.new_folder_btn button img {
-  margin-right: 5px;
 }

@@ -1,14 +1,14 @@
-'use client'
-import { Folder } from '@/app/_types/types';
+'use client';
+import { Folder } from '@/app/_types/Folder';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
-import styles from './page.module.css';
+import { usePathname } from 'next/navigation';
+import styles from './folder.module.css';
 
 const Folder = ({ folder }: { folder: Folder }) => {
   const pathname = usePathname();
   const decodedPathname = decodeURIComponent(pathname).replace(/%20/g, ' ');
   return (
-    <Link href={`/folder/${folder.name}`} key={folder.id}>
+    <Link href={`/folder/${folder.name}`}>
       <div
         className={
           decodedPathname == `/folder/${folder.name}` ? `${styles.active}` : ''
@@ -45,10 +45,10 @@ const Folder = ({ folder }: { folder: Folder }) => {
             />
           </svg>
         )}
-        <li>{folder.name}</li>
-        <div className="more-options">
+        <p>{folder.name}</p>
+        {/* <div className="more-options">
           <button className="more-options-button">More Options</button>
-        </div>
+        </div> */}
       </div>
     </Link>
   );
