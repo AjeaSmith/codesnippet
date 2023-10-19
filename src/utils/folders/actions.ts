@@ -20,12 +20,12 @@ export async function createFolder(name: string) {
 
 export async function getFolders(): Promise<Folder[]> {
   try {
-     throw new Error('Fetch Failed');
-    // const folders = await prisma.folder.findMany();
-    // if (!folders.length) {
-    //   throw new Error('Fetch Failed');
-    // }
-    // return folders;
+    //  throw new Error('Fetch Failed');
+    const folders = await prisma.folder.findMany();
+    if (!folders.length) {
+      throw new Error('Fetch Failed');
+    }
+    return folders;
   } catch (error) {
     console.error('FETCH FOLDERS:', error);
     throw error;

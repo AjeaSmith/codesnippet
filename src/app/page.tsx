@@ -1,10 +1,9 @@
 import styles from '@/app/page.module.css';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ReactNode } from 'react';
+import AddFolderButton from './_components/AddFolderButton';
+import FolderList from './_components/FolderList';
 import { inter400 } from './_fonts/fonts';
-import AddFolderButton from './components/AddFolderButton';
-import FolderList from './components/FolderList';
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   return (
@@ -20,7 +19,6 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           />
           <h3>John Doe</h3>
         </section>
-        <Link href="/create">Create page</Link>
 
         {/* FOLDERS */}
         <FolderList />

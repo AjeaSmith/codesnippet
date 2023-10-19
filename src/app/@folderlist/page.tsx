@@ -1,5 +1,5 @@
 import { getFolders } from '@/utils/folders/actions';
-import Folder from '../components/Folder';
+import Folder from '../_components/Folder';
 import styles from './page.module.css';
 
 async function getData() {
