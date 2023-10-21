@@ -1,6 +1,5 @@
 import { getFolders } from '@/utils/folders/actions';
 import Folder from './Folder';
-import styles from './folder.module.css';
 
 async function fetchFolders() {
   try {
