@@ -13,9 +13,12 @@ const AddFolderButton = () => {
   }
 
   return (
-    <button onClick={handleSubmit}>
+    <button
+      onClick={handleSubmit}
+      className="flex items-center justify-center cursor-pointer h-[80px] border-none w-full p-4"
+    >
       <Image src="/plus.png" alt="plus" width={24} height={24} />
-      <span>New Folder</span>
+      <span className="text-[#f4faff] ml-[5px]">New Folder</span>
     </button>
   );
 };

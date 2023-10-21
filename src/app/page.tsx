@@ -7,9 +7,11 @@ import { inter400 } from './_fonts/fonts';
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   return (
-    <div className={`${styles.page_wrapper} ${inter400.className}`}>
-      <aside className={styles.aside}>
-        <section className={styles.user_section}>
+    <div className={`flex ${inter400.className}`}>
+      <aside className="w-[357px] h-screen bg-[#1e1f21] relative">
+        <section
+          className={`${styles.user} flex flex-col justify-center items-center p-4 border-b-2 border-[#1b1b1b] mb-4`}
+        >
           <Image
             priority
             src="/user.png"
@@ -22,8 +24,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
 
         {/* FOLDERS */}
         <FolderList />
-
-        <section className={styles.new_folder_btn}>
+        <section className={`${styles.btn_container} w-full bottom-0 absolute border-t-1 border-t-black`}>
           <AddFolderButton />
         </section>
       </aside>

@@ -12,11 +12,12 @@ async function fetchFolders() {
 }
 const FolderList = async () => {
   const folders = await fetchFolders();
-  return (
-    <nav className={styles.folder_list}>
-      <h5>Folders</h5>
 
-      <ul>
+  return (
+    <nav className={`max-h-[490px] overflow-y-auto`}>
+      <h5 className="opacity-[0.5] mb-[30px] mx-[35px]">Folders</h5>
+
+      <ul className="overflow-y-scroll scroll-smooth p-0 list-none">
         {folders.map((folder) => (
           <Folder folder={folder} key={folder.id} />
         ))}
