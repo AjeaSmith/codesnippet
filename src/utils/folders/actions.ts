@@ -37,7 +37,8 @@ export async function getFolders(): Promise<Folder[]> {
 export async function deleteFolder(id: string) {
   try {
     await prisma.folder.delete({ where: { id } });
+    revalidatePath('/');
   } catch (error) {
-    console.log('FOLDER:', error);
+    console.log('FOLDER DELETION:', error);
   }
 }

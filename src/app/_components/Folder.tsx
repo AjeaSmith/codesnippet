@@ -1,14 +1,28 @@
 'use client';
 import { Folder } from '@/app/_types/Folder';
+import { deleteFolder } from '@/utils/folders/actions';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 const Folder = ({ folder }: { folder: Folder }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [defaultFolders] = useState([
+    'All Snippets',
+    'Favorites',
+    'Recommended',
+  ]);
+
   const pathname = usePathname();
   const decodedPathname = decodeURIComponent(pathname).replace(/%20/g, ' ');
+
+  const removeFolder = async (folderId: string) => {
+    console.log(folderId);
+    await deleteFolder(folderId);
+  };
   return (
-    <li>
-      <Link href={`/folder/${folder.name}`}>
+    <li className="flex justify-between relative">
+      <Link className="w-full" href={`/folder/${folder.name}`}>
         <div
           className={`flex items-center px-[2rem] py-[1rem] hover:cursor-pointer hover:bg-[#131415] ${
             decodedPathname == `/folder/${folder.name}` ? `bg-[#fe6c0b]` : ''
@@ -49,27 +63,93 @@ const Folder = ({ folder }: { folder: Folder }) => {
           )}
           <span className="w-full flex justify-between items-center">
             <p>{folder.name}</p>
-            <div className="flex">
-              <button>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <g fill="none">
-                    <path d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z" />
-                    <path
-                      fill="#F4FAFF"
-                      d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2Zm0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16Zm-4.5 6.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm4.5 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm4.5 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z"
-                    />
-                  </g>
-                </svg>
-              </button>
-            </div>
           </span>
         </div>
       </Link>
+      {!defaultFolders.includes(folder.name) && (
+        <div className="flex absolute right-[20px] top-[20px]">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#b91c1c"
+                d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z"
+              />
+            </svg>
+          </button>
+          {isOpen && (
+            <div
+              className="relative z-10"
+              aria-labelledby="modal-title"
+              role="dialog"
+              aria-modal="true"
+            >
+              <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+              <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                  <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                      <div className="sm:flex sm:items-start">
+                        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                          <svg
+                            className="h-6 w-6 text-red-600"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                            />
+                          </svg>
+                        </div>
+                        <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                          <h3
+                            className="text-base font-semibold leading-6 text-gray-900"
+                            id="modal-title"
+                          >
+                            Delete {folder.name}
+                          </h3>
+                          <div className="mt-2">
+                            <p className="text-sm text-gray-500">
+                              Are you sure you want to delete this folder? This
+                              action cannot be undone.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                      <button
+                        onClick={() => removeFolder(folder.id)}
+                        type="button"
+                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => setIsOpen(false)}
+                        type="button"
+                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </li>
   );
 };
