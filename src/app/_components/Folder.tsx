@@ -17,7 +17,6 @@ const Folder = ({ folder }: { folder: Folder }) => {
   const decodedPathname = decodeURIComponent(pathname).replace(/%20/g, ' ');
 
   const removeFolder = async (folderId: string) => {
-    console.log(folderId);
     await deleteFolder(folderId);
   };
   return (
