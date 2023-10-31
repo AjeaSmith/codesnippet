@@ -8,18 +8,18 @@ const LoginPage = () => {
   const userName = useRef('');
   const pass = useRef('');
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await signIn('Credentials', {
-      username: userName.current,
-      password: pass.current,
-      redirect: false,
-    });
+  // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const res = await signIn('Credentials', {
+  //     username: userName.current,
+  //     password: pass.current,
+  //     redirect: false,
+  //   });
 
-    if (!res?.error) {
-      //   router.push(props.callbackUrl ?? 'http://localhost:3000');
-    }
-  };
+  //   if (!res?.error) {
+  //     //   router.push(props.callbackUrl ?? 'http://localhost:3000');
+  //   }
+  // };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">

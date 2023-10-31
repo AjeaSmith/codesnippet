@@ -1,11 +1,5 @@
-import React, { ReactNode } from 'react';
-
-type PageProps = {
-  children: ReactNode;
-};
-
-function AppPage({ children }: PageProps) {
-  return <div>{children}</div>;
+function AppPage() {
+  return <div>Choose a folder from Sidebar</div>;
 }
 
 export default AppPage;
