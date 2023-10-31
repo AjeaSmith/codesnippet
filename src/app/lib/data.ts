@@ -1,5 +1,6 @@
 'use server';
-import prisma from '@/app/_lib/db';
+import prisma from '@/app/lib/db';
+import { FolderIcon } from '@heroicons/react/24/solid';
 import { Folder } from '@/app/_types/Folder';
 import { revalidatePath } from 'next/cache';
 
@@ -8,7 +9,7 @@ export async function createFolder(name: string) {
     await prisma.folder.create({
       data: {
         name,
-        icon: 'folder',
+        icon: FolderIcon.toString(),
       },
     });
 

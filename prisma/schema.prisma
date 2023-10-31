@@ -13,6 +13,7 @@ datasource db {
 model CodeSnippet {
   id     String      @id @default(auto()) @map("_id") @db.ObjectId
   title  String
+  isFavorite Boolean
   code   String
 
   folder Folder?  @relation(fields: [folderId], references: [id])
