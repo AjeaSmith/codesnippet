@@ -1,13 +1,11 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
-function AppLayout({ children }: { children: ReactNode }) {
-  return (
-    <>
-      <div></div>
-      {children}
-    </>
-  );
+type PageProps = {
+  children: ReactNode;
+};
+
+function AppPage({ children }: PageProps) {
+  return <div>{children}</div>;
 }
 
-// create types for props when passed down
-export default AppLayout;
+export default AppPage;
