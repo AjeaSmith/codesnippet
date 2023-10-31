@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export default function AppLayout({ children }: { children: ReactNode }) {
+function AppLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <div></div>
@@ -10,3 +10,4 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 }
 
 // create types for props when passed down
+export default AppLayout;
