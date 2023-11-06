@@ -1,5 +1,5 @@
-import { deleteFolder } from '@/app/lib/data';
-import { Folder } from '../_types/Folder';
+import { deleteFolder } from '@/app/lib/actions';
+import { Folder } from '@/app/lib/definitions';
 
 type DeleteFolderModalProps = {
   folder: Folder;

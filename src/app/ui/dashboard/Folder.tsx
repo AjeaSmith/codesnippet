@@ -1,11 +1,11 @@
 'use client';
-import { Folder } from '@/app/_types/Folder';
+import { Folder } from '@/app/lib/definitions';
 import { FolderIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import DeleteFolderModal from '../DeleteFolderModal';
+import DeleteFolderModal from './DeleteFolderModal';
 
 const Folder = ({ folder }: { folder: Folder }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +15,12 @@ const Folder = ({ folder }: { folder: Folder }) => {
   return (
     <Link
       key={folder.name}
-      href={`/folder/${folder.name}`}
+      href={`/dashboard/folder/${folder.name}`}
       className={clsx(
-        'flex h-[48px] px-[2rem] grow items-center justify-center gap-2 text-sm font-medium hover:bg-[#131415] md:flex-none md:justify-start mb-2',
+        'flex h-[48px] px-[2rem] grow items-center gap-2 text-sm font-medium hover:bg-[#131415] md:flex-none md:justify-start mb-2',
         {
-          'bg-[#fe6c0b]': decodedPathname === `/folder/${folder.name}`,
-          'hover:bg-[#fe6c0b]': decodedPathname === `/folder/${folder.name}`,
+          'bg-[#fe6c0b]': decodedPathname === `/dashboard/folder/${folder.name}`,
+          'hover:bg-[#fe6c0b]': decodedPathname === `/dashboard/folder/${folder.name}`,
         }
       )}
     >
@@ -28,11 +28,11 @@ const Folder = ({ folder }: { folder: Folder }) => {
         <div className="flex items-center">
           <FolderIcon
             className={clsx('w-6 mr-2', {
-              'text-[#F4FAFF]': decodedPathname === `/folder/${folder.name}`,
-              'text-[#FE6C0B]': decodedPathname !== `/folder/${folder.name}`,
+              'text-[#F4FAFF]': decodedPathname === `/dashboard/folder/${folder.name}`,
+              'text-[#FE6C0B]': decodedPathname !== `/dashboard/folder/${folder.name}`,
             })}
           />
-          <p className="hidden md:block">{folder.name}</p>
+          <p className="block">{folder.name}</p>
         </div>
         <div className="flex absolute right-[20px]">
           <button onClick={() => setIsOpen(!isOpen)}>

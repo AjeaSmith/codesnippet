@@ -1,13 +1,15 @@
 'use client';
-import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { useRef } from 'react';
 import InputBox from './InputBox';
 
-const LoginPage = () => {
-  const userName = useRef('');
-  const pass = useRef('');
+import { useFormState, useFormStatus } from 'react-dom';
+import { authenticate } from '@/app/lib/actions';
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
 
+const LoginPage = () => {
+  const [code, action] = useFormState(authenticate, undefined);
+  const { pending } = useFormStatus();
   // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();
   //   const res = await signIn('Credentials', {
@@ -31,14 +33,14 @@ const LoginPage = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form>
+        <form action={action}>
           <InputBox
             name="email"
             id="email"
             type="email"
             required
             labelText="Email Address"
-            placeholder='e.g. mail@example.com'
+            placeholder="e.g. mail@example.com"
           />
           <InputBox
             name="password"
@@ -50,6 +52,7 @@ const LoginPage = () => {
 
           <div className="mt-14">
             <button
+              aria-disabled={pending}
               type="submit"
               className="flex mb-5 w-full justify-center rounded-md bg-[#FE6C0B] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#FE6C0B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
@@ -85,6 +88,16 @@ const LoginPage = () => {
               </svg>
               Sign in with Google
             </button>
+          </div>
+          <div className="flex h-8 items-end space-x-1">
+            {code === 'CredentialSignin' && (
+              <>
+                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                <p aria-live="polite" className="text-sm text-red-500">
+                  Invalid credentials
+                </p>
+              </>
+            )}
           </div>
         </form>
       </div>

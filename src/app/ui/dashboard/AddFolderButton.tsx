@@ -1,6 +1,6 @@
 'use client';
+import { createFolder } from '@/app/lib/actions';
 import styles from '@/app/page.module.css';
-import { createFolder } from '@/app/lib/data';
 import Image from 'next/image';
 
 const AddFolderButton = () => {

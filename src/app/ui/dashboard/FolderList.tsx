@@ -1,4 +1,4 @@
-import { getFolders } from '@/app/lib/data';
+import { getFolders } from '@/app/lib/actions';
 import Folder from './Folder';
 
 async function fetchFolders() {

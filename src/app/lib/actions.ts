@@ -1,8 +1,8 @@
 'use server';
 import prisma from '@/app/lib/db';
+import { Folder } from '@/app/lib/definitions';
 import { FolderIcon } from '@heroicons/react/24/solid';
-import { Folder } from '@/app/_types/Folder';
-import { revalidatePath } from 'next/cache';
+import { unstable_noStore as noStore, revalidatePath } from 'next/cache';
 
 export async function createFolder(name: string) {
   try {
@@ -20,6 +20,9 @@ export async function createFolder(name: string) {
 }
 
 export async function getFolders(): Promise<Folder[]> {
+  // test remove this to see if performance is slow in network
+  noStore();
+
   try {
     //  throw new Error('Fetch Failed');
     const folders = await prisma.folder.findMany();

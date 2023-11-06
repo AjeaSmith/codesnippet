@@ -1,19 +1,16 @@
 import styles from '@/app/page.module.css';
-import Image from 'next/image';
+import { currentUser } from '@clerk/nextjs';
+import { ReactNode } from 'react';
 
-const UserProfile = () => {
+const UserProfile = async ({ children }: { children: ReactNode }) => {
+  const user = await currentUser();
+
   return (
     <section
       className={`${styles.user} flex flex-col justify-center items-center p-4 border-b-2 border-[#1b1b1b] mb-4`}
     >
-      <Image
-        priority
-        src="/user.png"
-        width={100}
-        height={100}
-        alt="Picture of author"
-      />
-      <h3>John Doe</h3>
+      {children}
+      <h3 className="mt-3">{user?.firstName}</h3>
     </section>
   );
 };

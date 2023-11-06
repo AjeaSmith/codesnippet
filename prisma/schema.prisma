@@ -9,12 +9,18 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
-
+model User {
+  id       String      @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String
+  password String
+}
 model CodeSnippet {
   id     String      @id @default(auto()) @map("_id") @db.ObjectId
   title  String
   isFavorite Boolean
   code   String
+  tags   String[]
 
   folder Folder?  @relation(fields: [folderId], references: [id])
   folderId String? @db.ObjectId
