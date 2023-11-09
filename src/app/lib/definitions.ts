@@ -4,12 +4,14 @@ export type Folder = {
   icon: string;
 };
 
-export type User = {
+export type CodeSnippet = {
   id: string;
-  name: string;
-  email: string;
-  password: string;
-};
+  title: string;
+  code: string;
+  language: string;
+  tags: string[];
+  folderId: string | null;
+}
 
 export type Tag = {
   name: string

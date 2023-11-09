@@ -1,33 +1,33 @@
 'use client';
-import { createSnippet } from '@/app/lib/actions';
 import { CodeSnippet, Folder } from '@/app/lib/definitions';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import CodeView from './Code';
+import { updateSnippetById } from '@/app/lib/actions';
 
-const Form = ({ folders }: { folders: Folder[] }) => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<CodeSnippet>();
+const EditForm = ({
+  codeSnippet,
+  folders,
+}: {
+  codeSnippet: CodeSnippet | null;
+  folders: Folder[];
+}) => {
+  const { register, handleSubmit, control } = useForm<CodeSnippet>();
 
   const codeLanguages = SyntaxHighlighter.supportedLanguages;
-
-  const [selectedLanguage, setSelectedLanguage] =
-    useState<string>('javascript');
-
-  const [codeText, setcodeText] = useState<string>('');
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(
+    codeSnippet!.language
+  );
   const [isPreview, setIsPreview] = useState<boolean>(false);
+  const [codeText, setcodeText] = useState<string>(codeSnippet!.code);
 
   const onSubmit: SubmitHandler<CodeSnippet> = (data) => {
-    createSnippet(data);
+    updateSnippetById(codeSnippet!.id, data);
   };
 
   const renderTag = (props: any) => {
@@ -60,7 +60,7 @@ const Form = ({ folders }: { folders: Folder[] }) => {
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-2xl font-semibold leading-7">
-              Add a Code Snippet
+              Edit Code Snippet
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="col-span-full">
@@ -73,17 +73,13 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                 <div className="mt-2">
                   <input
                     type="text"
-                    {...register('title', { required: true })}
+                    {...register('title')}
+                    defaultValue={codeSnippet?.title}
                     placeholder="e.g. React login form"
                     autoComplete="title"
                     className="block w-full text-slate-900 px-2 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-                {errors.title && (
-                  <div className="mt-2 text-sm text-red-500">
-                    <span>This field is required</span>
-                  </div>
-                )}
               </div>
               <div className="col-span-full">
                 <div className="flex justify-between items-center">
@@ -95,9 +91,9 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                   </label>
                   <div className="flex items-center w-2/4 justify-end">
                     <select
-                      {...register('language', { required: true })}
+                      {...register('language')}
                       className="block mr-4 text-slate-900 rounded-md border border-gray-200 py-2 px-2 text-sm outline-2 placeholder:text-gray-900"
-                      value={selectedLanguage}
+                      defaultValue={codeSnippet?.language}
                       onChange={(e) => setSelectedLanguage(e.target.value)}
                     >
                       <option value="" disabled>
@@ -120,9 +116,9 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                 <div className="mt-2">
                   {!isPreview ? (
                     <textarea
-                      {...register('code', { required: true })}
+                      {...register('code')}
                       rows={3}
-                      value={codeText}
+                      defaultValue={codeText}
                       onChange={(e) => setcodeText(e.target.value)}
                       className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     ></textarea>
@@ -133,11 +129,7 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                     />
                   )}
                 </div>
-                {errors.code && (
-                  <div className="mt-2 text-sm text-red-500">
-                    <span>This field is required</span>
-                  </div>
-                )}
+
                 <p className="mt-3 text-sm leading-6 text-gray-400">
                   Paste in your code snippet
                 </p>
@@ -152,7 +144,7 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                   </label>
                   <div className="mt-2">
                     <select
-                      {...register('folderId', { required: true })}
+                      {...register('folderId')}
                       className="block w-full text-slate-900 rounded-md border border-gray-200 py-2 px-2 text-sm outline-2 placeholder:text-gray-900"
                       aria-describedby="folder-error"
                     >
@@ -166,11 +158,6 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                       ))}
                     </select>
                   </div>
-                  {errors.folderId && (
-                    <div className="mt-2 text-sm text-red-500">
-                      <span>This field is required</span>
-                    </div>
-                  )}
                 </div>
               )}
               <div className="col-span-full">
@@ -184,22 +171,16 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                   <Controller
                     name="tags"
                     control={control}
-                    defaultValue={[]} // Set the default value as an empty array
+                    defaultValue={codeSnippet?.tags}
                     render={({ field }) => (
                       <TagsInput
                         renderTag={renderTag}
                         value={field.value}
-                        {...register('tags', { required: true })}
                         onChange={field.onChange}
                       />
                     )}
                   />
                 </div>
-                {errors.tags && (
-                  <div className="mt-2 text-sm text-red-500">
-                    <span>This field is required</span>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -224,4 +205,4 @@ const Form = ({ folders }: { folders: Folder[] }) => {
   );
 };
 
-export default Form;
+export default EditForm;
