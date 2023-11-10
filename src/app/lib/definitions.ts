@@ -12,7 +12,3 @@ export type CodeSnippet = {
   tags: string[];
   folderId: string | null;
 }
-
-export type Tag = {
-  name: string
-}

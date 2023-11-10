@@ -42,6 +42,31 @@ export async function fetchCodeSnippetById(
   }
 }
 
+export async function fetchSnippetsByQuery(query: string) {
+  try {
+    // Fetch snippets
+    const snippets = await prisma.codeSnippet.findMany();
+
+    // Filter snippets that match the search term
+    const filteredSnippets = snippets.filter((snippet) => {
+      return (
+        snippet.title.includes(query) ||
+        snippet.code.includes(query) ||
+        snippet.tags.some((tag) =>
+          tag.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    });
+
+    return filteredSnippets;
+  } catch (error) {
+    // Handle errors appropriately
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 // MUTATE DATA
 export async function createFolder(name: string) {
   try {

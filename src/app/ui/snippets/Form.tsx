@@ -47,7 +47,7 @@ const Form = ({ folders }: { folders: Folder[] }) => {
   };
 
   return (
-    <div className="w-full px-4 md:w-4/6 md:px-0 mx-auto">
+    <div className="w-full px-4 md:w-4/6 md:px-0 md:max-w-xl mx-auto">
       <div className="py-10">
         <Link href="/dashboard/folder/AllSnippets" className="underline">
           <span className="flex">
