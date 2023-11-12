@@ -1,5 +1,5 @@
 import { fetchFolders } from '@/app/lib/actions';
-import Folder from './Folder';
+import FolderItem from './FolderItem';
 
 const FolderList = async () => {
   const folders = await fetchFolders();
@@ -7,7 +7,7 @@ const FolderList = async () => {
   return (
     <>
       {folders.map((folder) => (
-        <Folder folder={folder} key={folder.id} />
+        <FolderItem folder={folder} key={folder.id} />
       ))}
     </>
   );

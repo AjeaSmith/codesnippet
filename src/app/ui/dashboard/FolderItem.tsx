@@ -1,5 +1,6 @@
 'use client';
 import { Folder } from '@/app/lib/definitions';
+import { TrashIcon } from '@heroicons/react/24/outline';
 import { FolderIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import DeleteFolderModal from './DeleteFolderModal';
 
-const Folder = ({ folder }: { folder: Folder }) => {
+const FolderItem = ({ folder }: { folder: Folder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -35,17 +36,7 @@ const Folder = ({ folder }: { folder: Folder }) => {
         </div>
         <div className="flex absolute right-[20px]">
           <button onClick={() => setIsOpen(!isOpen)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="#b91c1c"
-                d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z"
-              />
-            </svg>
+            <TrashIcon className='w-6 text-red-500'/>
           </button>
           {isOpen && (
             <DeleteFolderModal folder={folder} setIsOpen={setIsOpen} />
@@ -56,4 +47,4 @@ const Folder = ({ folder }: { folder: Folder }) => {
   );
 };
 
-export default Folder;
+export default FolderItem;

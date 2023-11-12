@@ -1,25 +1,32 @@
-'use client';
-import { CodeSnippet } from '@/app/lib/definitions';
+import { fetchCodeSnippetById } from '@/app/lib/actions';
 import {
   ClipboardDocumentCheckIcon,
-  PencilSquareIcon,
   TrashIcon,
-} from '@heroicons/react/24/solid';
+} from '@heroicons/react/24/outline';
+import { PencilSquareIcon } from '@heroicons/react/24/solid';
+import { headers } from 'next/headers';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import CodeView from './CodeView';
 
-const CodeDetailItem = ({ snippet }: { snippet: CodeSnippet | null }) => {
-  const pathname = usePathname();
+const CodeDetailItem = async ({ id }: { id: string }) => {
+  const snippet = await fetchCodeSnippetById(id);
+  const heads = headers();
+  const pathname = heads.get('next-url');
+
+  if (!snippet) {
+    notFound();
+  }
+
   return (
     <section className="px-8 grid auto-rows-max gap-4">
       <div className="flex justify-between">
-        <p className="flex items-center">
+        <span className="flex items-center">
           <ClipboardDocumentCheckIcon className="w-6 cursor-pointer mr-[15px] text-[#FE6C0B]" />
           <h2 className="text-xl">{snippet?.title}</h2>
-        </p>
+        </span>
         <span className="flex items-center">
-          <Link href={`${pathname}/edit`}>
+          <Link href={`/${pathname}/edit`}>
             <PencilSquareIcon className="w-6 text-[#FE6C0B] cursor-pointer" />
           </Link>
           <TrashIcon className="w-6 ml-2 text-red-500 cursor-pointer" />
