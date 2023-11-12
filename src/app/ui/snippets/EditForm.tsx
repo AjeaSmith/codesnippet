@@ -1,4 +1,5 @@
 'use client';
+import { updateSnippetById } from '@/app/lib/actions';
 import { CodeSnippet, Folder } from '@/app/lib/definitions';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
@@ -7,8 +8,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
-import CodeView from './Code';
-import { updateSnippetById } from '@/app/lib/actions';
+import CodeView from './CodeView';
 
 const EditForm = ({
   codeSnippet,

@@ -42,28 +42,29 @@ export async function fetchCodeSnippetById(
   }
 }
 
-export async function fetchSnippetsByQuery(query: string) {
+export async function fetchSnippets() {
   try {
     // Fetch snippets
     const snippets = await prisma.codeSnippet.findMany();
 
-    // Filter snippets that match the search term
-    const filteredSnippets = snippets.filter((snippet) => {
-      return (
-        snippet.title.includes(query) ||
-        snippet.code.includes(query) ||
-        snippet.tags.some((tag) =>
-          tag.toLowerCase().includes(query.toLowerCase())
-        )
-      );
-    });
-
-    return filteredSnippets;
+    return snippets;
   } catch (error) {
     // Handle errors appropriately
     throw error;
-  } finally {
-    await prisma.$disconnect();
+  }
+}
+
+export async function fetchSnippetsByFolder(
+  id: string
+): Promise<CodeSnippet[]> {
+  try {
+    const snippet = await prisma.codeSnippet.findMany({
+      where: { folderId: id },
+    });
+    return snippet;
+  } catch (error) {
+    console.log('Database Error: Failed to Fetch Snippets by folder.');
+    throw error;
   }
 }
 
@@ -79,7 +80,10 @@ export async function createFolder(name: string) {
 
     revalidatePath('/');
   } catch (err) {
-    await prisma.$disconnect();
+    console.log(err);
+    return {
+      message: 'Database Error: Failed to Create Folder.',
+    };
   }
 }
 

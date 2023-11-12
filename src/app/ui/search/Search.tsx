@@ -36,7 +36,7 @@ const Search = () => {
           />
         </div>
         <div className="border-[#FE6C0B] bg-[#FE6C0B] p-2 rounded-md">
-          <Link href="/code/create">
+          <Link href="/dashboard/code/create">
             <PlusCircleIcon className="w-6 text-white" />
           </Link>
         </div>

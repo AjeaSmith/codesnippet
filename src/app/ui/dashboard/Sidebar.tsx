@@ -1,12 +1,14 @@
 import { UserButton } from '@clerk/nextjs';
+import { Suspense } from 'react';
+import { FolderListSkeleton } from '../skeletons';
 import AddFolderButton from './AddFolderButton';
-import FolderList from './FolderList';
 import NavLinks from './NavLinks';
 import UserProfile from './User';
+import FolderList from './FolderList';
 
 const Sidebar = () => {
   return (
-    <aside className="h-screen bg-[#1e1f21] relative">
+    <aside className="h-screen bg-[#1e1f21] relative w-96">
       <UserProfile>
         <UserButton />
       </UserProfile>
@@ -16,7 +18,10 @@ const Sidebar = () => {
 
         <ul className="overflow-y-scroll scroll-smooth p-0 list-none">
           <NavLinks />
-          <FolderList />
+
+          <Suspense fallback={<FolderListSkeleton />}>
+            <FolderList />
+          </Suspense>
         </ul>
       </nav>
 

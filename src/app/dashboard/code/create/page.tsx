@@ -1,5 +1,5 @@
-import { fetchFolders } from '../../lib/actions';
-import Form from '../../ui/snippets/Form';
+import { fetchFolders } from '../../../lib/actions';
+import Form from '../../../ui/snippets/Form';
 
 const CreateSnippetPage = async () => {
   const folders = await fetchFolders();

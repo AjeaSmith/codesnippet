@@ -1,15 +1,13 @@
-import { fetchSnippetsByQuery } from '@/app/lib/actions';
 import { CodeSnippet } from '@/app/lib/definitions';
 import Link from 'next/link';
 
-const SnippetList = async ({ query }: { query: string }) => {
-  const codeSnippets = await fetchSnippetsByQuery(query);
+const CodeSnippetItem = ({ data }: { data: CodeSnippet[] }) => {
   return (
     <div className="p-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {codeSnippets.map((snippet: CodeSnippet) => {
+      {data.map((snippet: CodeSnippet) => {
         return (
           <Link
-            href={`/code/${snippet.id}`}
+            href={`/dashboard/code/${snippet.id}`}
             key={snippet.id}
             className="p-5 border-2 border-[#F4FAFF] border-opacity-40 bg-[#1e1f21] bg-opacity-50 shadow-md rounded-md hover:cursor-pointer hover:border-[#FE6C0B] hover:border-2"
           >
@@ -34,4 +32,4 @@ const SnippetList = async ({ query }: { query: string }) => {
   );
 };
 
-export default SnippetList;
+export default CodeSnippetItem;

@@ -8,7 +8,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
-import CodeView from './Code';
+import CodeView from './CodeView';
 
 const Form = ({ folders }: { folders: Folder[] }) => {
   const {

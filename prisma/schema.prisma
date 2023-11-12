@@ -12,12 +12,12 @@ datasource db {
 model CodeSnippet {
   id     String      @id @default(auto()) @map("_id") @db.ObjectId
   title  String
-  isFavorite Boolean? @default(false)
+  isFavorite Boolean @default(false)
   code   String
   tags   String[]
 
   folder Folder?  @relation(fields: [folderId], references: [id])
-  folderId String? @db.ObjectId
+  folderId String @db.ObjectId
   language String
 }
 

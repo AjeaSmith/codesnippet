@@ -1,9 +1,9 @@
 import Search from '@/app/ui/search/Search';
 import { SnippetListSkeleton } from '@/app/ui/skeletons';
-import SnippetList from '@/app/ui/snippets/SnippetList';
+import AllSnippetsList from '@/app/ui/snippets/AllSnippetsList';
 import { Suspense } from 'react';
 
-const AllSnippets = async ({
+const AllSnippetsPage = async ({
   searchParams,
 }: {
   searchParams?: {
@@ -19,10 +19,10 @@ const AllSnippets = async ({
     <div>
       <Search />
       <Suspense fallback={<SnippetListSkeleton />}>
-        <SnippetList query={query} />
+        <AllSnippetsList query={query} />
       </Suspense>
     </div>
   );
 };
 
-export default AllSnippets;
+export default AllSnippetsPage;
