@@ -1,13 +1,13 @@
 import { deleteFolder } from '@/app/lib/actions';
 import { Folder } from '@/app/lib/definitions';
+import { Dispatch, SetStateAction } from 'react';
 
-type DeleteFolderModalProps = {
-  folder: Folder;
-  setIsOpen: (isOpen: boolean) => void;
-};
-const DeleteFolderModal: React.FC<DeleteFolderModalProps> = ({
+const DeleteFolderModal = ({
   folder,
   setIsOpen,
+}: {
+  folder: Folder;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const removeFolder = async (folderId: string) => {
     await deleteFolder(folderId);

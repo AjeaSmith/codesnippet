@@ -31,7 +31,7 @@ const Form = ({ folders }: { folders: Folder[] }) => {
   };
 
   const renderTag = (props: any) => {
-    const { tag, key, disabled, onRemove, getTagDisplayValue, ...other } =
+    const { tag, key, disabled, onRemove, getTagDisplayValue } =
       props;
 
     return (
