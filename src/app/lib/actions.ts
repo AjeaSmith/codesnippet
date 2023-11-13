@@ -42,7 +42,7 @@ export async function fetchSnippetById(
   }
 }
 
-export async function fetchSnippets() {
+export async function fetchSnippets(): Promise<CodeSnippet[]> {
   try {
     // Fetch snippets
     const snippets = await prisma.codeSnippet.findMany();
@@ -64,6 +64,18 @@ export async function fetchSnippetsByFolder(
     return snippet;
   } catch (error) {
     console.log('Database Error: Failed to Fetch Snippets by folder.');
+    throw error;
+  }
+}
+
+export async function fetchSnippetsByFavorite(): Promise<CodeSnippet[]> {
+  try {
+    const likedSnippets = await prisma.codeSnippet.findMany({
+      where: { isFavorite: true },
+    });
+    return likedSnippets;
+  } catch (error) {
+    console.log('Database Error: Failed to Fetch Snippets by favorites.');
     throw error;
   }
 }
