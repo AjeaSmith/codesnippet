@@ -24,7 +24,7 @@ export async function fetchFolders(): Promise<Folder[]> {
     await prisma.$disconnect();
   }
 }
-export async function fetchCodeSnippetById(
+export async function fetchSnippetById(
   id: string
 ): Promise<CodeSnippet | null> {
   try {
@@ -121,6 +121,20 @@ export async function createSnippet(formData: CodeSnippet) {
 
   revalidatePath('/dashboard/folder/AllSnippets');
   redirect('/dashboard/folder/AllSnippets');
+}
+export async function favoriteSnippet(snippetId: string, value: boolean) {
+  try {
+    const updatedSnippet = await prisma.codeSnippet.update({
+      where: { id: snippetId },
+      data: { isFavorite: value },
+    });
+    revalidatePath(`/dashboard/code/${updatedSnippet.id}`);
+  } catch (error) {
+    console.log(error);
+    return {
+      message: 'Database Error: Failed to Favorite Snippet.',
+    };
+  }
 }
 
 export async function updateSnippetById(id: string, updatedData: CodeSnippet) {
