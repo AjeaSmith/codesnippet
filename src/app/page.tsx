@@ -1,11 +1,11 @@
-import { currentUser } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs';
 import Link from 'next/link';
 
 export default async function Page() {
-  const user = await currentUser();
+  const { userId } = auth();
   return (
     <main className="flex flex-col p-6 items-center">
-      {!user ? (
+      {!userId ? (
         <>
           <div className="text-center mb-3">
             <h1 className="text-4xl mt-10 mb-2">Welcome!</h1>
