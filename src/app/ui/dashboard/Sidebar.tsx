@@ -2,9 +2,9 @@ import { UserButton } from '@clerk/nextjs';
 import { Suspense } from 'react';
 import { FolderListSkeleton } from '../skeletons';
 import AddFolderButton from './AddFolderButton';
+import FolderList from './FolderList';
 import NavLinks from './NavLinks';
 import UserProfile from './User';
-import FolderList from './FolderList';
 
 const Sidebar = () => {
   return (

@@ -91,3 +91,19 @@ export function CodeDetailItemSkeleton() {
     </div>
   );
 }
+
+export function UserProfileSkeleton() {
+  return (
+    <div className="mx-8 p-4 bg-[#1e1f21] shadow-md opacity-70 rounded-md">
+      <div className="flex flex-col items-center">
+        <Skeleton
+          circle={true}
+          width={40}
+          height={40}
+          className="mb-4 bg-[#1e1f21] opacity-10"
+        />
+        <Skeleton width={80} height={24} className="bg-[#1e1f21] opacity-10" />
+      </div>
+    </div>
+  );
+}

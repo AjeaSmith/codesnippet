@@ -1,16 +1,16 @@
-import { deleteFolder } from '@/app/lib/actions';
-import { Folder } from '@/app/lib/definitions';
+import { deleteSnippetById } from '@/app/lib/actions';
+import { CodeSnippet } from '@/app/lib/definitions';
 import { Dispatch, SetStateAction } from 'react';
 
-const DeleteFolderModal = ({
-  folder,
+const DeleteSnippetModal = ({
+  snippet,
   setIsOpen,
 }: {
-  folder: Folder;
+  snippet: CodeSnippet;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const removeFolder = async (folderId: string) => {
-    await deleteFolder(folderId);
+  const removeSnippet = async () => {
+    await deleteSnippetById(snippet.id);
   };
   return (
     <div
@@ -47,12 +47,12 @@ const DeleteFolderModal = ({
                     className="text-base font-semibold leading-6 text-gray-900"
                     id="modal-title"
                   >
-                    Deleting {folder.name}?
+                    Deleting {snippet.title}?
                   </h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete this folder? This action
-                      cannot be undone.
+                      Are you sure you want to delete this Code Snippet? This
+                      action cannot be undone.
                     </p>
                   </div>
                 </div>
@@ -60,7 +60,7 @@ const DeleteFolderModal = ({
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
-                onClick={() => removeFolder(folder.id)}
+                onClick={removeSnippet}
                 type="button"
                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
               >
@@ -81,4 +81,4 @@ const DeleteFolderModal = ({
   );
 };
 
-export default DeleteFolderModal;
+export default DeleteSnippetModal;

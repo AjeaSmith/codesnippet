@@ -18,7 +18,7 @@ const AllSnippetsList = async ({ query }: { query: string }) => {
     return <NoSnippetsView />;
   }
 
-  return <CodeSnippetItem data={codeSnippets} />;
+  return <CodeSnippetItem data={filteredSnippets} />;
 };
 
 export default AllSnippetsList;

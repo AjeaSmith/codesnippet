@@ -192,8 +192,8 @@ export async function updateSnippetById(id: string, updatedData: CodeSnippet) {
       message: 'Database Error: Failed to Update Code Snippet.',
     };
   }
-  revalidatePath(`/code/${id}`);
-  redirect(`/code/${id}`);
+  revalidatePath(`/dashboard/code/${id}`);
+  redirect(`/dashboard/code/${id}`);
 }
 
 export async function deleteSnippetById(id: string) {
