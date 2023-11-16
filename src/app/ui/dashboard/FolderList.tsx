@@ -14,8 +14,3 @@ const FolderList = async () => {
 };
 
 export default FolderList;
-
-
-// Are you sure you want to delete this folder?
-
-// All notes and any subfolders will be deleted.

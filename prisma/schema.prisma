@@ -17,7 +17,7 @@ model CodeSnippet {
   tags   String[]
 
   folder Folder?  @relation(fields: [folderId], references: [id])
-  folderId String @db.ObjectId
+  folderId String? @db.ObjectId
   language String
 }
 

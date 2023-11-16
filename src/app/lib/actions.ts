@@ -83,14 +83,14 @@ export async function fetchSnippetsByFavorite(): Promise<CodeSnippet[]> {
 // MUTATE DATA
 export async function createFolder(name: string) {
   try {
-    await prisma.folder.create({
+    const folder = await prisma.folder.create({
       data: {
         name,
         icon: FolderIcon.toString(),
       },
     });
 
-    revalidatePath('/');
+    revalidatePath(`/dashboard/folder/${folder.id}`);
   } catch (err) {
     console.log(err);
     return {
@@ -101,11 +101,34 @@ export async function createFolder(name: string) {
 
 export async function deleteFolder(id: string) {
   try {
+    // Step 1: Unlink snippets from the folder
+    const snippets = await prisma.codeSnippet.findMany({
+      where: { folderId: id },
+      select: { id: true },
+    });
+
+    await prisma.folder.update({
+      where: { id },
+      data: {
+        snippets: {
+          disconnect: snippets.map((snippet) => ({ id: snippet.id })),
+        },
+      },
+    });
+
+    // Step 2: Delete the folder
     await prisma.folder.delete({ where: { id } });
-    revalidatePath('/');
+
+    // Step 3: Delete the snippets
+    await prisma.codeSnippet.deleteMany({
+      where: { id: { in: snippets.map((snippet) => snippet.id) } },
+    });
+
   } catch (error) {
     console.log('FOLDER DELETION:', error);
   }
+  revalidatePath('/dashboard/folder/AllSnippets');
+  redirect('/dashboard/folder/AllSnippets');
 }
 
 export async function createSnippet(formData: CodeSnippet) {

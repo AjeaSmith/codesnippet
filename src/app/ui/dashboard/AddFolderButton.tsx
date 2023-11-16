@@ -1,7 +1,7 @@
 'use client';
 import { createFolder } from '@/app/lib/actions';
 import styles from '@/app/page.module.css';
-import Image from 'next/image';
+import { PlusCircleIcon } from '@heroicons/react/24/outline';
 
 const AddFolderButton = () => {
   async function handleSubmit() {
@@ -21,7 +21,7 @@ const AddFolderButton = () => {
         onClick={handleSubmit}
         className="flex items-center justify-center cursor-pointer h-[80px] border-none w-full p-4"
       >
-        <Image src="/plus.png" alt="plus" width={24} height={24} />
+        <PlusCircleIcon className="w-6 h-6 text-[#FE6C0B]" />
         <span className="text-[#f4faff] ml-[5px]">New Folder</span>
       </button>
     </section>

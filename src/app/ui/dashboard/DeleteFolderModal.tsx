@@ -47,12 +47,12 @@ const DeleteFolderModal = ({
                     className="text-base font-semibold leading-6 text-gray-900"
                     id="modal-title"
                   >
-                    Deleting {folder.name}?
+                    Deleting {folder.name}
                   </h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete this folder? This action
-                      cannot be undone.
+                      Are you sure you want to delete this folder? 
+                      All snippets associated will be deleted. This action cannot be undone.
                     </p>
                   </div>
                 </div>

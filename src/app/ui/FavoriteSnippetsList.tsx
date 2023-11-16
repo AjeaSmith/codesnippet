@@ -1,9 +1,9 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { fetchSnippetsByFavorite } from '../lib/actions';
-import NoSnippetsView from './snippets/NoSnippetsView';
-import Link from 'next/link';
 import { CodeSnippet } from '../lib/definitions';
 import { filterSnippetsByQuery } from '../lib/utils/filterSnippets';
+import NoSnippetsView from './snippets/NoSnippetsView';
 
 const FavoriteSnippetsList = async ({ query }: { query: string }) => {
   const likedSnippets = await fetchSnippetsByFavorite();
