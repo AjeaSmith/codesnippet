@@ -49,6 +49,7 @@ export async function fetchSnippets(): Promise<CodeSnippet[]> {
     return snippets;
   } catch (error) {
     // Handle errors appropriately
+    console.log('SNIPPETS:', error);
     throw error;
   }
 }
