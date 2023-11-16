@@ -11,11 +11,6 @@ const links = [
     href: '/dashboard/folder/AllSnippets',
     icon: FolderIcon,
   },
-  {
-    name: 'Recommended',
-    href: '/dashboard/folder/Recommended',
-    icon: FolderIcon,
-  },
 ];
 const NavLinks = () => {
   const pathname = usePathname();

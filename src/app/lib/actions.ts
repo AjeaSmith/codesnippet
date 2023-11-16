@@ -11,10 +11,9 @@ export async function fetchFolders(): Promise<Folder[]> {
   noStore();
 
   try {
-    //  throw new Error('Fetch Failed');
     const folders = await prisma.folder.findMany();
     if (!folders.length) {
-      throw new Error('Fetch Failed');
+      throw new Error('Fetching folders Failed');
     }
     return folders;
   } catch (error) {
