@@ -16,7 +16,6 @@ const AllSnippetsPage = async ({
 
   return (
     <div>
-      hi
       <Search />
       <Suspense fallback={<SnippetListSkeleton />}>
         <AllSnippetsList query={query} snippets={codeSnippets} />
