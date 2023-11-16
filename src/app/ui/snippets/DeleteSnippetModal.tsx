@@ -1,6 +1,7 @@
 import { deleteSnippetById } from '@/app/lib/actions';
 import { CodeSnippet } from '@/app/lib/definitions';
 import { Dispatch, SetStateAction } from 'react';
+import toast from 'react-hot-toast';
 
 const DeleteSnippetModal = ({
   snippet,
@@ -10,7 +11,11 @@ const DeleteSnippetModal = ({
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const removeSnippet = async () => {
-    await deleteSnippetById(snippet.id);
+    await deleteSnippetById(snippet.id).then(() => {
+      toast.success(`${snippet.title} was deleted successfully`, {
+        duration: 3000,
+      });
+    });
   };
   return (
     <div

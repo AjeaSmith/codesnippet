@@ -5,6 +5,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
@@ -26,13 +27,16 @@ const Form = ({ folders }: { folders: Folder[] }) => {
   const [codeText, setcodeText] = useState<string>('');
   const [isPreview, setIsPreview] = useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<CodeSnippet> = (data) => {
-    createSnippet(data);
+  const onSubmit: SubmitHandler<CodeSnippet> = async (data) => {
+    await createSnippet(data).then(() =>
+      toast.success('Code Snippet created successfully!', {
+        duration: 4000,
+      })
+    );
   };
 
   const renderTag = (props: any) => {
-    const { tag, key, disabled, onRemove, getTagDisplayValue } =
-      props;
+    const { tag, key, disabled, onRemove, getTagDisplayValue } = props;
 
     return (
       <span key={key} className="bg-[#FE6C0B] p-1.5 mr-2 rounded-md mt-1.5">

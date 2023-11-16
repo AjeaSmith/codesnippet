@@ -1,6 +1,8 @@
+'use client';
 import { deleteFolder } from '@/app/lib/actions';
 import { Folder } from '@/app/lib/definitions';
 import { Dispatch, SetStateAction } from 'react';
+import toast from 'react-hot-toast';
 
 const DeleteFolderModal = ({
   folder,
@@ -10,7 +12,9 @@ const DeleteFolderModal = ({
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const removeFolder = async (folderId: string) => {
-    await deleteFolder(folderId);
+    await deleteFolder(folderId).then(() => {
+      toast.success(`${folder.name} was deleted successfully!`, { duration: 4000 });
+    });
   };
   return (
     <div
@@ -51,8 +55,8 @@ const DeleteFolderModal = ({
                   </h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete this folder? 
-                      All snippets associated will be deleted. This action cannot be undone.
+                      Are you sure you want to delete this folder? All snippets
+                      associated will be deleted. This action cannot be undone.
                     </p>
                   </div>
                 </div>

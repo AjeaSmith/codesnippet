@@ -5,7 +5,7 @@ import { FolderIcon } from '@heroicons/react/24/solid';
 import { unstable_noStore as noStore, revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-// FETCH DATA
+// ---------FETCH DATA------------
 export async function fetchFolders(): Promise<Folder[]> {
   // test remove this to see if performance is slow in network
   noStore();
@@ -80,7 +80,7 @@ export async function fetchSnippetsByFavorite(): Promise<CodeSnippet[]> {
   }
 }
 
-// MUTATE DATA
+// ---------MUTATE DATA------------
 export async function createFolder(name: string) {
   try {
     const folder = await prisma.folder.create({
@@ -89,7 +89,6 @@ export async function createFolder(name: string) {
         icon: FolderIcon.toString(),
       },
     });
-
     revalidatePath(`/dashboard/folder/${folder.id}`);
   } catch (err) {
     console.log(err);
@@ -123,7 +122,6 @@ export async function deleteFolder(id: string) {
     await prisma.codeSnippet.deleteMany({
       where: { id: { in: snippets.map((snippet) => snippet.id) } },
     });
-
   } catch (error) {
     console.log('FOLDER DELETION:', error);
   }

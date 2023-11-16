@@ -5,6 +5,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
@@ -26,13 +27,16 @@ const EditForm = ({
   const [isPreview, setIsPreview] = useState<boolean>(false);
   const [codeText, setcodeText] = useState<string>(codeSnippet!.code);
 
-  const onSubmit: SubmitHandler<CodeSnippet> = (data) => {
-    updateSnippetById(codeSnippet!.id, data);
+  const onSubmit: SubmitHandler<CodeSnippet> = async (data) => {
+    await updateSnippetById(codeSnippet!.id, data).then(() => {
+      toast.success(`Snippet was updated successfully`, {
+        duration: 3000,
+      });
+    });
   };
 
   const renderTag = (props: any) => {
-    const { tag, key, disabled, onRemove, getTagDisplayValue } =
-      props;
+    const { tag, key, disabled, onRemove, getTagDisplayValue } = props;
 
     return (
       <span key={key} className="bg-[#FE6C0B] p-1.5 mr-2 rounded-md mt-1.5">
