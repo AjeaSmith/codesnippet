@@ -11,16 +11,16 @@ const AllSnippetsPage = async ({
     query?: string;
   };
 }) => {
-  // const codeSnippets = await fetchSnippets();
-  // const query = searchParams?.query || '';
+  const codeSnippets = await fetchSnippets();
+  const query = searchParams?.query || '';
 
   return (
     <div>
       hi
-      {/* <Search />
+      <Search />
       <Suspense fallback={<SnippetListSkeleton />}>
         <AllSnippetsList query={query} snippets={codeSnippets} />
-      </Suspense> */}
+      </Suspense>
     </div>
   );
 };
