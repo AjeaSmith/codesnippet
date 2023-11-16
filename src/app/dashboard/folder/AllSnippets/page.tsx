@@ -8,7 +8,6 @@ const AllSnippetsPage = async ({
 }: {
   searchParams?: {
     query?: string;
-    page?: string;
   };
 }) => {
   // const heads = headers();

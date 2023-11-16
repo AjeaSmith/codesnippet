@@ -10,9 +10,9 @@ const AllSnippetsList = async ({ query }: { query: string }) => {
   // Filter snippets that match the search term
   const filteredSnippets = filterSnippetsByQuery(codeSnippets, query);
 
-  if (!filteredSnippets) {
-    notFound();
-  }
+  // if (!filteredSnippets) {
+  //   notFound();
+  // }
 
   if (filteredSnippets.length === 0) {
     return <NoSnippetsView />;
