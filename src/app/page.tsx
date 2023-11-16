@@ -1,12 +1,12 @@
-import { auth } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs';
 import { CodeBracketIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 
 export default async function Page() {
-  const { userId } = auth();
+  const user = await currentUser();
   return (
     <main className="flex flex-col p-6 items-center h-screen justify-center">
-      {!userId ? (
+      {!user ? (
         <>
           <CodeBracketIcon className="w-[100px] h-[100px] text-[#FE6C0B]" />
           <div className="text-center mb-3">
