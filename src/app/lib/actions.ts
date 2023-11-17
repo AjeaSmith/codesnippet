@@ -125,7 +125,7 @@ export async function deleteFolder(id: string) {
   } catch (error) {
     console.log('FOLDER DELETION:', error);
   }
-  revalidatePath('/dashboard/folder/AllSnippets');
+  // revalidatePath('/dashboard/folder/AllSnippets');
   redirect('/dashboard/folder/AllSnippets');
 }
 
