@@ -12,9 +12,6 @@ export async function fetchFolders(): Promise<Folder[]> {
 
   try {
     const folders = await prisma.folder.findMany();
-    if (!folders.length) {
-      throw new Error('Fetching folders Failed');
-    }
     return folders;
   } catch (error) {
     console.error('FETCH FOLDERS:', error);
@@ -125,7 +122,7 @@ export async function deleteFolder(id: string) {
   } catch (error) {
     console.log('FOLDER DELETION:', error);
   }
-  // revalidatePath('/dashboard/folder/AllSnippets');
+  revalidatePath('/dashboard/folder/AllSnippets');
   redirect('/dashboard/folder/AllSnippets');
 }
 
