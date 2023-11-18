@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Code Snippet',
+  title: 'Code Snippet - All your code snippets in one place!',
   description: 'All your code snippets in one place!',
 };
 

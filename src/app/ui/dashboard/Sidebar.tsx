@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <aside className="h-screen bg-[#1e1f21] relative w-96">
       <UserProfile>
-        <UserButton />
+        <UserButton afterSignOutUrl="/sign-in" />
       </UserProfile>
 
       <nav className={`max-h-[490px] overflow-y-auto`}>
