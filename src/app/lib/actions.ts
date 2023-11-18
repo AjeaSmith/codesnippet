@@ -87,7 +87,7 @@ export async function createFolder(name: string) {
       },
     });
     revalidatePath(`/dashboard/folder/${folder.id}`);
-    return folder.id
+    return folder.id;
   } catch (err) {
     console.log(err);
     return {
@@ -157,7 +157,6 @@ export async function createSnippet(formData: {
     };
   }
   revalidatePath('/dashboard/folder/AllSnippets');
-  redirect('/dashboard/folder/AllSnippets');
 }
 
 export async function favoriteSnippet(snippetId: string, value: boolean) {

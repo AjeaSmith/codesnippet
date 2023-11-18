@@ -34,6 +34,7 @@ const Form = ({ folders }: { folders: Folder[] }) => {
       toast.success(`Code Snippet created successfully!`, {
         duration: 4000,
       });
+      router.push('/dashboard/folder/AllSnippets');
     });
   };
 
