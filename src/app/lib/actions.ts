@@ -7,9 +7,6 @@ import { redirect } from 'next/navigation';
 
 // ---------FETCH DATA------------
 export async function fetchFolders(): Promise<Folder[]> {
-  // test remove this to see if performance is slow in network
-  noStore();
-
   try {
     const folders = await prisma.folder.findMany();
     return folders;
