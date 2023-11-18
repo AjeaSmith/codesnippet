@@ -3,6 +3,7 @@ import { createSnippet } from '@/app/lib/actions';
 import { CodeSnippet, Folder } from '@/app/lib/definitions';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -12,6 +13,7 @@ import 'react-tagsinput/react-tagsinput.css';
 import CodeView from './CodeView';
 
 const Form = ({ folders }: { folders: Folder[] }) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -28,11 +30,11 @@ const Form = ({ folders }: { folders: Folder[] }) => {
   const [isPreview, setIsPreview] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<CodeSnippet> = async (data) => {
-    await createSnippet(data).then(() =>
-      toast.success('Code Snippet created successfully!', {
+    await createSnippet(data).then(() => {
+      toast.success(`Code Snippet created successfully!`, {
         duration: 4000,
-      })
-    );
+      });
+    });
   };
 
   const renderTag = (props: any) => {

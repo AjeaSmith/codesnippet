@@ -2,15 +2,18 @@
 import { createFolder } from '@/app/lib/actions';
 import styles from '@/app/page.module.css';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 const AddFolderButton = () => {
+  const router = useRouter();
   async function handleSubmit() {
     let folderName: string | null = prompt('Please enter folder name:');
 
     if (folderName !== null) {
-      await createFolder(folderName).then(() => {
+      await createFolder(folderName).then((id) => {
         toast.success('Folder created successfully!', { duration: 3000 });
+        router.push(`/dashboard/folder/${id}`);
       });
     }
     return;

@@ -1,6 +1,7 @@
 'use client';
 import { deleteFolder } from '@/app/lib/actions';
 import { Folder } from '@/app/lib/definitions';
+import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 import toast from 'react-hot-toast';
 
@@ -11,9 +12,13 @@ const DeleteFolderModal = ({
   folder: Folder;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const removeFolder = async (folderId: string) => {
-    await deleteFolder(folderId).then(() => {
-      toast.success(`${folder.name} was deleted successfully!`, { duration: 4000 });
+  const router = useRouter();
+  const removeFolder = async () => {
+    await deleteFolder(folder.id).then(() => {
+      toast.success(`${folder.name} was deleted successfully!`, {
+        duration: 4000,
+      });
+      router.push('/dashboard/folder/AllSnippets');
     });
   };
   return (
@@ -64,7 +69,7 @@ const DeleteFolderModal = ({
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
-                onClick={() => removeFolder(folder.id)}
+                onClick={removeFolder}
                 type="button"
                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
               >

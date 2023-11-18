@@ -87,6 +87,7 @@ export async function createFolder(name: string) {
       },
     });
     revalidatePath(`/dashboard/folder/${folder.id}`);
+    return folder.id
   } catch (err) {
     console.log(err);
     return {
@@ -123,10 +124,15 @@ export async function deleteFolder(id: string) {
     console.log('FOLDER DELETION:', error);
   }
   revalidatePath('/dashboard/folder/AllSnippets');
-  redirect('/dashboard/folder/AllSnippets');
 }
 
-export async function createSnippet(formData: CodeSnippet) {
+export async function createSnippet(formData: {
+  title: string;
+  code: string;
+  folderId?: string | null; // Make folderId optional
+  tags: string[];
+  language: string;
+}) {
   const { title, code, folderId, tags, language } = formData;
 
   try {
@@ -134,24 +140,26 @@ export async function createSnippet(formData: CodeSnippet) {
       data: {
         title,
         code,
-        folder: {
-          connect: {
-            id: folderId!, // Assuming 'folder' is an object with an 'id' property
-          },
-        },
+        folder: folderId
+          ? {
+              connect: {
+                id: folderId,
+              },
+            }
+          : undefined,
         tags,
         language,
       },
     });
   } catch (error) {
     return {
-      message: 'Database Error: Failed to Create Code Snippet.',
+      message: `Database Error: Failed to Create Code Snippet. ${error}`,
     };
   }
-
   revalidatePath('/dashboard/folder/AllSnippets');
   redirect('/dashboard/folder/AllSnippets');
 }
+
 export async function favoriteSnippet(snippetId: string, value: boolean) {
   try {
     const updatedSnippet = await prisma.codeSnippet.update({

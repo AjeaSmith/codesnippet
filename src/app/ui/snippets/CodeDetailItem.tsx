@@ -15,7 +15,9 @@ const CodeDetailItem = async ({ id }: { id: string }) => {
       <div className="flex justify-between">
         <CodeDetailActions snippet={snippet} />
       </div>
-      <CodeView language={snippet?.language} codeString={snippet?.code} />
+      <div className={`max-h-[600px] overflow-y-auto`}>
+        <CodeView language={snippet?.language} codeString={snippet?.code} />
+      </div>
     </section>
   );
 };
