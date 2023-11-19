@@ -2,7 +2,7 @@
 import prisma from '@/app/lib/db';
 import { CodeSnippet, Folder } from '@/app/lib/definitions';
 import { FolderIcon } from '@heroicons/react/24/solid';
-import { unstable_noStore as noStore, revalidatePath } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 // ---------FETCH DATA------------
