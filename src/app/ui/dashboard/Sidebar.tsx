@@ -8,7 +8,7 @@ import UserProfile from './User';
 
 const Sidebar = () => {
   return (
-    <aside className="h-screen bg-[#1e1f21] relative w-96">
+    <aside className="h-screen bg-[#1e1f21] relative w-[17rem]">
       <UserProfile>
         <UserButton afterSignOutUrl="/sign-in" />
       </UserProfile>

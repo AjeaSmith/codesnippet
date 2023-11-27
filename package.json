@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
-    "prepare": "husky install",
-    "seed": "node scripts/seed.ts"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.26.2",

@@ -120,7 +120,7 @@ const Form = ({ folders }: { folders: Folder[] }) => {
                       type="button"
                       onClick={() => setIsPreview(!isPreview)}
                     >
-                      Preview {isPreview ? 'off' : 'on'}
+                      Preview {isPreview ? 'on' : 'off'}
                     </button>
                   </div>
                 </div>
